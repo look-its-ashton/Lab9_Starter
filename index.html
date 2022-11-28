@@ -7,6 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lab 9</title>
 
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+        token: "b300589a9fba47bf97a3c1944ae52a15"
+        // for more configuration options, see https://docs.trackjs.com
+      });
+  </script>
+
+  <script type="text/javascript">
+    window.onerror = function(msg, url, linenumber) {
+      console.error('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
+      TrackJS.track('<TrackJS Call Initiated from window.onerror>');
+      return true;
+    }
+  </script>
+
   <style>
     button {
       margin: 3px;
@@ -89,6 +105,11 @@
   </main>
 
   <script>
+    //let e = [;
+    //garbageIn = garbage.out;
+    //let whereIs.mysemicolon;
+    //i++;;;
+
     class ErrorFormValidationBInput extends Error {
       constructor(message) {
       super(message);
