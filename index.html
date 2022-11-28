@@ -54,6 +54,7 @@
     <form>
       <fieldset>
         <legend>Error Calculator</legend>
+        <!--<input name="first-num" id="first-num" />-->
         <input name="first-num" id="first-num" />
         <select name="operator" id="operator">
           <option>+</option>
@@ -88,20 +89,52 @@
   </main>
 
   <script>
+    class ErrorFormValidationBInput extends Error {
+      constructor(message) {
+      super(message);
+      this.name = "ErrorFormValidationBInput";
+      }
+    }
+
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
-      e.preventDefault();
-      let output = document.querySelector('output');
-      let firstNum = document.querySelector('#first-num').value;
-      let secondNum = document.querySelector('#second-num').value;
-      let operator = document.querySelector('#operator').value;
-      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
-    });
-
+      try{
+        e.preventDefault();
+        let output = document.querySelector('output');
+        let firstNum = document.querySelector('#first-num').value;
+        if (parseInt(firstNum) === NaN)
+          throw new ErrorFormValidationBInput("String Entry Attempted");
+        let secondNum = document.querySelector('#second-num').value;
+        if (parseInt(secondNum) === NaN)
+          throw new ErrorFormValidationBInput("String Entry Attempted");
+        let operator = document.querySelector('#operator').value;
+        output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      } catch (error) {
+        console.error("form initialization unsuccessful");
+        console.error(error.message);
+      } finally {
+        console.log('form initialization finished');
+      }}); 
+    
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
 
     // Start your code here
     // You may move this JS to another file if you wish
+    errorBtns[0].addEventListener('click', ()=>{console.log('Console Log Button Pressed')});
+    errorBtns[1].addEventListener('click', ()=>{console.error('Console Error Button Pressed')});
+    errorBtns[2].addEventListener('click', ()=>{console.count('Console Log Button Pressed')});
+    errorBtns[3].addEventListener('click', ()=>{console.warn('Console Warn Button Pressed')});
+    errorBtns[4].addEventListener('click', ()=>{console.assert(1 === '1')});
+    errorBtns[5].addEventListener('click', ()=>{console.clear()});
+    errorBtns[6].addEventListener('click', ()=>{console.dir(errorBtns)});
+    errorBtns[7].addEventListener('click', ()=>{console.dirxml(errorBtns)});
+    errorBtns[8].addEventListener('click', ()=>{console.group()});
+    errorBtns[9].addEventListener('click', ()=>{console.groupEnd()});
+    errorBtns[10].addEventListener('click', ()=>{console.table(errorBtns)});
+    errorBtns[11].addEventListener('click', ()=>{console.time('Timer Button Pressed')});
+    errorBtns[12].addEventListener('click', ()=>{console.timeEnd('Timer Button Pressed')});
+    errorBtns[13].addEventListener('click', ()=>{console.trace()});
+    errorBtns[14].addEventListener('click', ()=>{console.error("Console Global Error Trigger")});
   </script>
 </body>
 
