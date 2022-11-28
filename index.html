@@ -102,10 +102,10 @@
         e.preventDefault();
         let output = document.querySelector('output');
         let firstNum = document.querySelector('#first-num').value;
-        if (parseInt(firstNum) === NaN)
+        if (!parseInt(firstNum))
           throw new ErrorFormValidationBInput("String Entry Attempted");
         let secondNum = document.querySelector('#second-num').value;
-        if (parseInt(secondNum) === NaN)
+        if (!parseInt(secondNum))
           throw new ErrorFormValidationBInput("String Entry Attempted");
         let operator = document.querySelector('#operator').value;
         output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
